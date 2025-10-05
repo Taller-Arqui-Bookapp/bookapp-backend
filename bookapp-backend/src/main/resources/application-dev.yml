@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/bookapp
+    username: bookapp_user
+    password: bookapp_pass
+  jpa:
+    hibernate:
+      ddl-auto: validate   
+    properties:
+      hibernate:
+        jdbc.lob.non_contextual_creation: true
+logging:
+  level:
+    org.hibernate.SQL: warn

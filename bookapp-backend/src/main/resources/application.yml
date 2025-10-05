@@ -1,0 +1,31 @@
+server:
+  port: 8080
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+spring:
+  profiles:
+    default: dev              # arranca en dev por defecto
+  mvc:
+    contentnegotiation:
+      favor-parameter: false  # JSON por defecto; XML vía Accept
+  flyway:
+    locations: classpath:db/migration/{vendor}   # usa postgresql/ u h2/ según el driver
+  datasource:
+    url: jdbc:postgresql://localhost:5432/bookapp
+    username: bookapp_user
+    password: bookapp_pass
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        jdbc.lob.non_contextual_creation: true
+
+logging:
+  level:
+    org.hibernate.SQL: warn
