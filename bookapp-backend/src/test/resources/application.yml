@@ -10,7 +10,9 @@ spring:
     driverClassName: org.h2.Driver
   jpa:
     hibernate:
-      ddl-auto: validate          # o create-drop si prefieres construir desde cero
+      ddl-auto: create-drop     # arranque limpio en cada test
   flyway:
     enabled: true
-    locations: classpath:db/migration/{vendor}
+    locations:
+      - classpath:db/migration/{vendor}
+      - classpath:db/seed/{vendor}/test  # datos iniciales para tests

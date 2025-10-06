@@ -35,6 +35,9 @@ dependencies {
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.17.2")
 	implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.17.2")
+
+	   // (parser XML robusto)
+    implementation("com.fasterxml.woodstox:woodstox-core")
 	//h2 y postgresql
 	runtimeOnly("com.h2database:h2")
 	runtimeOnly("org.postgresql:postgresql")
