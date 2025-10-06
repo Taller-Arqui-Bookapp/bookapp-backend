@@ -3,6 +3,7 @@ package com.bookapp.backend.adapters.`in`.rest
 import com.bookapp.backend.application.BookService
 import com.bookapp.backend.application.dto.CreateBookRequest
 import com.bookapp.backend.application.dto.PageResponse
+import com.bookapp.backend.domain.model.User   
 import com.bookapp.backend.domain.model.Book
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
@@ -38,9 +39,15 @@ class BookController(private val service: BookService) {
     fun delete(@PathVariable id: UUID) = service.delete(id)
 
     @GetMapping("/{id}/users", produces = ["application/json","application/xml"])
-    fun listUsers(
-        @PathVariable id: UUID,
-        @RequestParam(defaultValue = "0") page: Int,
-        @RequestParam(defaultValue = "20") size: Int
-    ) = service.listUsers(id, page, size)
+fun listUsers(
+    @PathVariable id: UUID,
+    @RequestParam(defaultValue = "0") page: Int,
+    @RequestParam(defaultValue = "20") size: Int
+): PageResponse<User> {
+    val (content, total) = service.listUsers(id, page, size)
+    val totalPages = if (size == 0) 1 else ((total + size - 1) / size).toInt()
+    return PageResponse(content, page, size, total, totalPages)
+}
+
+
 }

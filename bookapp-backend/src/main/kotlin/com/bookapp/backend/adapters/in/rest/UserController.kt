@@ -5,6 +5,7 @@ import com.bookapp.backend.application.dto.CreateUserRequest
 import com.bookapp.backend.domain.model.User
 import com.bookapp.backend.application.dto.PageResponse
 import jakarta.validation.Valid
+import com.bookapp.backend.domain.model.Book 
 import jakarta.validation.constraints.Positive
 import jakarta.validation.constraints.PositiveOrZero
 import org.springframework.validation.annotation.Validated
@@ -41,9 +42,15 @@ class UserController(private val service: UserService) {
     fun delete(@PathVariable id: UUID) = service.delete(id)
 
     @GetMapping("/{id}/books", produces = ["application/json","application/xml"])
-    fun listBooks(
-        @PathVariable id: UUID,
-        @RequestParam(defaultValue = "0") page: Int,
-        @RequestParam(defaultValue = "20") size: Int
-    ) = service.listBooks(id, page, size)
+fun listBooks(
+    @PathVariable id: UUID,
+    @RequestParam(defaultValue = "0") page: Int,
+    @RequestParam(defaultValue = "20") size: Int
+): PageResponse<Book> {
+    val (content, total) = service.listBooks(id, page, size)
+    val totalPages = if (size == 0) 1 else ((total + size - 1) / size).toInt()
+    return PageResponse(content, page, size, total, totalPages)
+}
+
+
 }
