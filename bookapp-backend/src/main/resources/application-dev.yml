@@ -1,3 +1,6 @@
+server:
+  port: 8080
+
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/bookapp
@@ -13,5 +16,5 @@ logging:
   level:
     org.hibernate.SQL: warn
 books:
-    api:
-      base: https://openlibrary.org
+  api:
+    base: https://www.googleapis.com/books/v1

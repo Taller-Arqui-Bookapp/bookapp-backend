@@ -10,39 +10,57 @@ import org.springframework.web.reactive.function.client.bodyToMono
 class GoogleBooksAdapter(private val booksWebClient: WebClient) : BookInfoPort {
 
     override fun findByIsbn(isbn: String): ExternalBook? {
-        val data: Map<String, Any> = booksWebClient.get()
-            .uri("/volumes?q=isbn:{isbn}", isbn)
-            .retrieve()
-            .bodyToMono<Map<String, Any>>()
-            .onErrorReturn(emptyMap())
-            .block() ?: return null
+        try {
+            val data: Map<String, Any> = booksWebClient.get()
+                .uri("/volumes?q=isbn:{isbn}", isbn)
+                .retrieve()
+                .bodyToMono<Map<String, Any>>()
+                .block() ?: return null
+                
+            println("Google Books API ISBN response: $data")
+            
+            val items = data["items"] as? List<*> ?: return null
+            if (items.isEmpty()) return null
 
-        val items = data["items"] as? List<*> ?: return null
-        if (items.isEmpty()) return null
-
-        return parseGoogleBookItem(items.first() as Map<*, *>, isbn)
+            return parseGoogleBookItem(items.first() as Map<*, *>, isbn)
+        } catch (e: Exception) {
+            println("Error calling Google Books API for ISBN $isbn: ${e.message}")
+            e.printStackTrace()
+            return null
+        }
     }
 
     override fun search(query: String, page: Int, size: Int): List<ExternalBook> {
         val startIndex = page * size
-        val res: Map<String, Any> = booksWebClient.get()
-            .uri { builder ->
-                builder.path("/volumes")
-                    .queryParam("q", query)
-                    .queryParam("startIndex", startIndex)
-                    .queryParam("maxResults", size)
-                    .queryParam("printType", "books")
-                    .build()
-            }
-            .retrieve()
-            .bodyToMono<Map<String, Any>>()
-            .onErrorReturn(emptyMap())
-            .block() ?: emptyMap()
-
-        val items = res["items"] as? List<*> ?: emptyList<Any>()
-        return items.mapNotNull { item ->
-            parseGoogleBookItem(item as? Map<*, *> ?: return@mapNotNull null)
+        try {
+            val res: Map<String, Any> = booksWebClient.get()
+                .uri { builder ->
+                    builder.path("/volumes")
+                        .queryParam("q", query)
+                        .queryParam("startIndex", startIndex)
+                        .queryParam("maxResults", size)
+                        .queryParam("printType", "books")
+                        .build()
+                }
+                .retrieve()
+                .bodyToMono<Map<String, Any>>()
+                .block() ?: emptyMap()
+            
+            println("Google Books API response: $res")
+            return parseSearchResponse(res)
+        } catch (e: Exception) {
+            println("Error calling Google Books API: ${e.message}")
+            e.printStackTrace()
+            return emptyList()
         }
+    }
+    
+    private fun parseSearchResponse(res: Map<String, Any>): List<ExternalBook> {
+
+            val items = res["items"] as? List<*> ?: emptyList<Any>()
+            return items.mapNotNull { item ->
+                parseGoogleBookItem(item as? Map<*, *> ?: return@mapNotNull null)
+            }
     }
 
     private fun parseGoogleBookItem(item: Map<*, *>, fallbackIsbn: String? = null): ExternalBook? {

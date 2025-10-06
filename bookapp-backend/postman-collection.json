@@ -1,0 +1,388 @@
+{
+	"info": {
+		"_postman_id": "bookapp-backend-api",
+		"name": "BookApp Backend API - Importación de Libros",
+		"description": "Colección de Postman para probar los endpoints de importación y búsqueda de libros del BookApp Backend",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "📚 Búsqueda y Listado",
+			"item": [
+				{
+					"name": "1. Listar todos los libros",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/books?page=0&size=20",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "books"],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "20"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2. Buscar libros por título local",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/books?q=kotlin",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "books"],
+							"query": [
+								{
+									"key": "q",
+									"value": "kotlin"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3. Buscar libros por ISBN local",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/books?isbn=9781617294747",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "books"],
+							"query": [
+								{
+									"key": "isbn",
+									"value": "9781617294747"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "🔍 Búsqueda Externa (Google Books)",
+			"item": [
+				{
+					"name": "1. Buscar libros externos - Kotlin",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/books/search?q=kotlin&page=0&size=10",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "books", "search"],
+							"query": [
+								{
+									"key": "q",
+									"value": "kotlin"
+								},
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2. Buscar libros externos - Spring Boot",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/books/search?q=spring boot&page=0&size=5",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "books", "search"],
+							"query": [
+								{
+									"key": "q",
+									"value": "spring boot"
+								},
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3. Buscar libros externos - Java Programming",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/books/search?q=java programming&page=0&size=10",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "books", "search"],
+							"query": [
+								{
+									"key": "q",
+									"value": "java programming"
+								},
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "📥 Importación Individual",
+			"item": [
+				{
+					"name": "1. Importar por ISBN - Kotlin in Action",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/books/import?isbn=9781617294747",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "books", "import"],
+							"query": [
+								{
+									"key": "isbn",
+									"value": "9781617294747"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2. Importar por ISBN - Effective Java",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/books/import?isbn=9780134685991",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "books", "import"],
+							"query": [
+								{
+									"key": "isbn",
+									"value": "9780134685991"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3. Importar por título - Spring Boot in Action",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/books/import/title?title=Spring Boot in Action",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "books", "import", "title"],
+							"query": [
+								{
+									"key": "title",
+									"value": "Spring Boot in Action"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "4. Importar por título - Clean Code",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/books/import/title?title=Clean Code",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "books", "import", "title"],
+							"query": [
+								{
+									"key": "title",
+									"value": "Clean Code"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "📦 Importación Masiva",
+			"item": [
+				{
+					"name": "1. Importar libros seleccionados",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"books\": [\n        {\n            \"title\": \"Kotlin in Action\",\n            \"authors\": [\"Dmitry Jemerov\", \"Svetlana Isakova\"],\n            \"isbn\": \"9781617294747\",\n            \"publishedYear\": 2017,\n            \"coverUrl\": \"https://books.google.com/books/content?id=example1\"\n        },\n        {\n            \"title\": \"Effective Java\",\n            \"authors\": [\"Joshua Bloch\"],\n            \"isbn\": \"9780134685991\",\n            \"publishedYear\": 2018,\n            \"coverUrl\": \"https://books.google.com/books/content?id=example2\"\n        },\n        {\n            \"title\": \"Clean Code\",\n            \"authors\": [\"Robert C. Martin\"],\n            \"isbn\": \"9780132350884\",\n            \"publishedYear\": 2008,\n            \"coverUrl\": \"https://books.google.com/books/content?id=example3\"\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/books/import/selected",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "books", "import", "selected"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2. Importar libros de programación",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"books\": [\n        {\n            \"title\": \"Spring Boot: Up and Running\",\n            \"authors\": [\"Mark Heckler\"],\n            \"isbn\": \"9781492076971\",\n            \"publishedYear\": 2021,\n            \"coverUrl\": null\n        },\n        {\n            \"title\": \"Java Concurrency in Practice\",\n            \"authors\": [\"Brian Goetz\"],\n            \"isbn\": \"9780321349606\",\n            \"publishedYear\": 2006,\n            \"coverUrl\": null\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/books/import/selected",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "books", "import", "selected"]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "📖 Gestión de Libros",
+			"item": [
+				{
+					"name": "1. Crear libro manualmente",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Libro de Prueba\",\n    \"author\": \"Autor de Prueba\",\n    \"isbn\": \"9999999999999\",\n    \"publishedYear\": 2023\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/books",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "books"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2. Obtener libro por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/books/{{book_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "books", "{{book_id}}"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3. Eliminar libro",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/books/{{book_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "books", "{{book_id}}"]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "🔧 Diagnóstico",
+			"item": [
+				{
+					"name": "1. Health Check",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/actuator/health",
+							"host": ["{{base_url}}"],
+							"path": ["actuator", "health"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2. Application Info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/actuator/info",
+							"host": ["{{base_url}}"],
+							"path": ["actuator", "info"]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8080",
+			"type": "string"
+		},
+		{
+			"key": "book_id",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
