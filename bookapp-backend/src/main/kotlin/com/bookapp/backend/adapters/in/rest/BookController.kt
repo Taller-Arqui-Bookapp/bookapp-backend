@@ -3,6 +3,7 @@ package com.bookapp.backend.adapters.`in`.rest
 import com.bookapp.backend.application.BookImportService
 import com.bookapp.backend.application.BookService
 import com.bookapp.backend.application.dto.CreateBookRequest
+import com.bookapp.backend.application.dto.ImportSelectedBooksRequest
 import com.bookapp.backend.application.dto.PageResponse
 import com.bookapp.backend.domain.model.Book
 import jakarta.validation.Valid
@@ -52,15 +53,24 @@ class BookController(
         return PageResponse(content, page, size, total, totalPages)
     }
 
-    // Endpoints para importar libros externos
-    @GetMapping("/external", produces = ["application/json"])
+    // Endpoints para búsqueda e importación de libros externos
+    @GetMapping("/search", produces = ["application/json"])
     fun searchExternal(
         @RequestParam q: String,
         @RequestParam(defaultValue = "0") page: Int,
         @RequestParam(defaultValue = "10") size: Int
     ) = importService.searchExternal(q, page, size)
 
+    @PostMapping("/import/selected", produces = ["application/json"])
+    fun importSelectedBooks(@Valid @RequestBody request: ImportSelectedBooksRequest) =
+        importService.importSelectedBooks(request.books)
+
+    // Endpoints legacy para compatibilidad
     @PostMapping("/import", produces = ["application/json"])
     fun importByIsbn(@RequestParam isbn: String) =
         importService.importByIsbn(isbn)
+
+    @PostMapping("/import/title", produces = ["application/json"])
+    fun importByTitle(@RequestParam title: String) =
+        importService.importByTitle(title)
 }

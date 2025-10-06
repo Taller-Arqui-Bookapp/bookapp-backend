@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.client.WebClient
 import org.springframework.web.reactive.function.client.bodyToMono
 
-@Component
+// @Component -- Deshabilitado temporalmente para usar Google Books API
 class OpenLibraryAdapter(private val booksWebClient: WebClient) : BookInfoPort {
 
     override fun findByIsbn(isbn: String): ExternalBook? {

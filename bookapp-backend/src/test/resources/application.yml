@@ -19,4 +19,4 @@ spring:
 
 books:
   api:
-    base: https://openlibrary.org
+    base: https://www.googleapis.com/books/v1

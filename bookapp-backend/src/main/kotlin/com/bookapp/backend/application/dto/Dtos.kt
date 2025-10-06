@@ -19,6 +19,34 @@ data class CreateBookRequest(
     val publishedYear: Int?
 )
 
+data class ImportSelectedBooksRequest(
+    val books: List<ExternalBookSelection>
+)
+
+data class ExternalBookSelection(
+    val title: String,
+    val authors: List<String>,
+    val isbn: String?,
+    val publishedYear: Int?,
+    val coverUrl: String?
+)
+
+data class BulkImportResponse(
+    val imported: List<BookImportResult>,
+    val errors: List<BookImportError>
+)
+
+data class BookImportResult(
+    val selection: ExternalBookSelection,
+    val importedBook: com.bookapp.backend.domain.model.Book,
+    val wasAlreadyExists: Boolean
+)
+
+data class BookImportError(
+    val selection: ExternalBookSelection,
+    val error: String
+)
+
 /**
  * Para XML, indicamos el wrapper de la lista y el nombre de cada ítem.
  * Usamos "item" genérico para que sirva con User y Book.

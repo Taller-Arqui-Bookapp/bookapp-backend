@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8081
 
 management:
   endpoints:
@@ -29,10 +29,7 @@ spring:
 logging:
   level:
     org.hibernate.SQL: warn
-  books:
-    api:
-      base: https://openlibrary.org
 
 books:
   api:
-    base: https://openlibrary.org
+    base: https://www.googleapis.com/books/v1
