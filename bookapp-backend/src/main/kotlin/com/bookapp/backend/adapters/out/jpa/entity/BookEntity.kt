@@ -11,5 +11,7 @@ class BookEntity(
     var author: String,
     @Column(unique = true) var isbn: String,
     @Column(name = "published_year") var publishedYear: Int?,
-    @Column(name = "created_at") var createdAt: Instant
+    @Column(name = "created_at") var createdAt: Instant,
+    @Column(name = "cover_url") var coverUrl: String? = null
+
 )

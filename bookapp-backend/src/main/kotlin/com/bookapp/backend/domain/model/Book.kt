@@ -9,5 +9,7 @@ data class Book(
     val author: String,
     val isbn: String,
     val publishedYear: Int?,
-    val createdAt: Instant
+    val createdAt: Instant,
+    val coverUrl: String? = null        // <-- nuevo
 )
+

@@ -12,3 +12,6 @@ spring:
 logging:
   level:
     org.hibernate.SQL: warn
+books:
+    api:
+      base: https://openlibrary.org

@@ -16,3 +16,7 @@ spring:
     locations:
       - classpath:db/migration/{vendor}
       - classpath:db/seed/{vendor}/test  # datos iniciales para tests
+
+books:
+  api:
+    base: https://openlibrary.org
