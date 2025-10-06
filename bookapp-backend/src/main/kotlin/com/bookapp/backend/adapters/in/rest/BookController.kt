@@ -18,7 +18,7 @@ class BookController(
     private val importService: BookImportService
 ) {
     
-    @GetMapping(produces = ["application/json"])
+    @GetMapping(produces = ["application/xml", "application/json"])
     fun list(
         @RequestParam(defaultValue = "0") page: Int,
         @RequestParam(defaultValue = "20") size: Int,
@@ -30,10 +30,10 @@ class BookController(
         return PageResponse(content, page, size, total, totalPages)
     }
 
-    @GetMapping("/{id}", produces = ["application/json"])
+    @GetMapping("/{id}", produces = ["application/xml", "application/json"])
     fun get(@PathVariable id: UUID) = service.get(id)
 
-    @PostMapping(produces = ["application/json"])
+    @PostMapping(produces = ["application/xml", "application/json"])
     @ResponseStatus(HttpStatus.CREATED)
     fun create(@Valid @RequestBody body: CreateBookRequest): Book =
         service.create(body.title, body.author, body.isbn, body.publishedYear)
@@ -42,7 +42,7 @@ class BookController(
     @ResponseStatus(HttpStatus.NO_CONTENT)
     fun delete(@PathVariable id: UUID) = service.delete(id)
 
-    @GetMapping("/{id}/users", produces = ["application/json"])
+    @GetMapping("/{id}/users", produces = ["application/xml", "application/json"])
     fun listUsers(
         @PathVariable id: UUID,
         @RequestParam(defaultValue = "0") page: Int,
@@ -54,23 +54,23 @@ class BookController(
     }
 
     // Endpoints para búsqueda e importación de libros externos
-    @GetMapping("/search", produces = ["application/json"])
+    @GetMapping("/search", produces = ["application/xml", "application/json"])
     fun searchExternal(
         @RequestParam q: String,
         @RequestParam(defaultValue = "0") page: Int,
         @RequestParam(defaultValue = "10") size: Int
     ) = importService.searchExternal(q, page, size)
 
-    @PostMapping("/import/selected", produces = ["application/json"])
+    @PostMapping("/import/selected", produces = ["application/xml", "application/json"])
     fun importSelectedBooks(@Valid @RequestBody request: ImportSelectedBooksRequest) =
         importService.importSelectedBooks(request.books)
 
     // Endpoints legacy para compatibilidad
-    @PostMapping("/import", produces = ["application/json"])
+    @PostMapping("/import", produces = ["application/xml", "application/json"])
     fun importByIsbn(@RequestParam isbn: String) =
         importService.importByIsbn(isbn)
 
-    @PostMapping("/import/title", produces = ["application/json"])
+    @PostMapping("/import/title", produces = ["application/xml", "application/json"])
     fun importByTitle(@RequestParam title: String) =
         importService.importByTitle(title)
 }

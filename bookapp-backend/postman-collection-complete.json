@@ -1,16 +1,16 @@
 {
 	"info": {
 		"_postman_id": "bookapp-backend-api-complete",
-		"name": "BookApp Backend API - Colección Completa",
-		"description": "Colección completa de Postman con todos los endpoints implementados en el BookApp Backend",
+		"name": "BookApp Backend API - Colección Completa (XML por defecto)",
+		"description": "Colección completa de Postman con todos los endpoints implementados en el BookApp Backend. **XML es el formato por defecto**, JSON requiere header Accept: application/json",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "📚 Gestión de Libros",
+			"name": "📚 Gestión de Libros (XML por defecto)",
 			"item": [
 				{
-					"name": "1. Listar todos los libros",
+					"name": "1. Listar todos los libros (XML)",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -33,7 +33,7 @@
 					"response": []
 				},
 				{
-					"name": "2. Buscar libros por título",
+					"name": "2. Buscar libros por título (XML)",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -60,7 +60,7 @@
 					"response": []
 				},
 				{
-					"name": "3. Buscar libros por ISBN",
+					"name": "3. Buscar libros por ISBN (XML)",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -79,7 +79,7 @@
 					"response": []
 				},
 				{
-					"name": "4. Obtener libro por ID",
+					"name": "4. Obtener libro por ID (XML)",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -92,13 +92,14 @@
 					"response": []
 				},
 				{
-					"name": "5. Crear libro manualmente",
+					"name": "5. Crear libro manualmente (respuesta XML)",
 					"request": {
 						"method": "POST",
 						"header": [
 							{
 								"key": "Content-Type",
-								"value": "application/json"
+								"value": "application/json",
+								"description": "Enviamos JSON, pero recibimos XML por defecto"
 							}
 						],
 						"body": {
@@ -114,7 +115,7 @@
 					"response": []
 				},
 				{
-					"name": "6. Eliminar libro",
+					"name": "6. Eliminar libro (XML)",
 					"request": {
 						"method": "DELETE",
 						"header": [],
@@ -127,7 +128,7 @@
 					"response": []
 				},
 				{
-					"name": "7. Usuarios que tienen un libro",
+					"name": "7. Usuarios que tienen un libro (XML)",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -150,13 +151,14 @@
 					"response": []
 				},
 				{
-					"name": "8. Libros en formato XML",
+					"name": "8. Listar libros en JSON",
 					"request": {
 						"method": "GET",
 						"header": [
 							{
 								"key": "Accept",
-								"value": "application/xml"
+								"value": "application/json",
+								"description": "Header requerido para recibir JSON"
 							}
 						],
 						"url": {
@@ -176,14 +178,73 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "9. Buscar libros por título en JSON",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/books?q=kotlin&page=0&size=10",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "books"],
+							"query": [
+								{
+									"key": "q",
+									"value": "kotlin"
+								},
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "10. Crear libro con respuesta JSON",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": "Para recibir respuesta en JSON"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Libro de Prueba JSON\",\n    \"author\": \"Autor de Prueba\",\n    \"isbn\": \"9999999999998\",\n    \"publishedYear\": 2023\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/books",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "books"]
+						}
+					},
+					"response": []
 				}
 			]
 		},
 		{
-			"name": "👥 Gestión de Usuarios",
+			"name": "👥 Gestión de Usuarios (XML por defecto)",
 			"item": [
 				{
-					"name": "1. Listar usuarios",
+					"name": "1. Listar usuarios (XML)",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -206,13 +267,14 @@
 					"response": []
 				},
 				{
-					"name": "2. Crear usuario",
+					"name": "2. Crear usuario (respuesta XML)",
 					"request": {
 						"method": "POST",
 						"header": [
 							{
 								"key": "Content-Type",
-								"value": "application/json"
+								"value": "application/json",
+								"description": "Enviamos JSON, recibimos XML"
 							}
 						],
 						"body": {
@@ -228,7 +290,7 @@
 					"response": []
 				},
 				{
-					"name": "3. Obtener usuario por ID",
+					"name": "3. Obtener usuario por ID (XML)",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -241,7 +303,7 @@
 					"response": []
 				},
 				{
-					"name": "4. Buscar usuarios",
+					"name": "4. Buscar usuarios (XML)",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -268,7 +330,7 @@
 					"response": []
 				},
 				{
-					"name": "5. Libros de un usuario",
+					"name": "5. Libros de un usuario (XML)",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -291,7 +353,7 @@
 					"response": []
 				},
 				{
-					"name": "6. Eliminar usuario",
+					"name": "6. Eliminar usuario (XML)",
 					"request": {
 						"method": "DELETE",
 						"header": [],
@@ -304,13 +366,14 @@
 					"response": []
 				},
 				{
-					"name": "7. Usuarios en formato XML",
+					"name": "7. Listar usuarios en JSON",
 					"request": {
 						"method": "GET",
 						"header": [
 							{
 								"key": "Accept",
-								"value": "application/xml"
+								"value": "application/json",
+								"description": "Header requerido para JSON"
 							}
 						],
 						"url": {
@@ -330,14 +393,59 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "8. Crear usuario con respuesta JSON",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": "Para recibir respuesta en JSON"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Usuario JSON\",\n    \"email\": \"usuario.json@ejemplo.com\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/users",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "users"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "9. Obtener usuario por ID en JSON",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/users/{{user_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "users", "{{user_id}}"]
+						}
+					},
+					"response": []
 				}
 			]
 		},
 		{
-			"name": "🔍 Búsqueda Externa (Google Books)",
+			"name": "🔍 Búsqueda Externa (Google Books) - XML por defecto",
 			"item": [
 				{
-					"name": "1. Buscar libros externos - Kotlin",
+					"name": "1. Buscar libros externos - Kotlin (XML)",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -364,7 +472,7 @@
 					"response": []
 				},
 				{
-					"name": "2. Buscar libros externos - Spring Boot",
+					"name": "2. Buscar libros externos - Spring Boot (XML)",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -391,7 +499,7 @@
 					"response": []
 				},
 				{
-					"name": "3. Buscar libros externos - Java Programming",
+					"name": "3. Buscar libros externos - Java Programming (XML)",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -416,14 +524,47 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "4. Buscar libros externos - Kotlin (JSON)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": "Header requerido para JSON"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/books/search?q=kotlin&page=0&size=10",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "books", "search"],
+							"query": [
+								{
+									"key": "q",
+									"value": "kotlin"
+								},
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
 		{
-			"name": "📥 Importación Individual",
+			"name": "📥 Importación Individual (XML por defecto)",
 			"item": [
 				{
-					"name": "1. Importar por ISBN - Kotlin in Action",
+					"name": "1. Importar por ISBN - Kotlin in Action (XML)",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -442,7 +583,7 @@
 					"response": []
 				},
 				{
-					"name": "2. Importar por ISBN - Effective Java",
+					"name": "2. Importar por ISBN - Effective Java (XML)",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -461,7 +602,7 @@
 					"response": []
 				},
 				{
-					"name": "3. Importar por título - Spring Boot in Action",
+					"name": "3. Importar por título - Spring Boot in Action (XML)",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -480,7 +621,7 @@
 					"response": []
 				},
 				{
-					"name": "4. Importar por título - Clean Code",
+					"name": "4. Importar por título - Clean Code (XML)",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -497,20 +638,46 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "5. Importar por ISBN - Kotlin in Action (JSON)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": "Para recibir respuesta en JSON"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/books/import?isbn=9781617294747",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "books", "import"],
+							"query": [
+								{
+									"key": "isbn",
+									"value": "9781617294747"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
 		{
-			"name": "📦 Importación Masiva",
+			"name": "📦 Importación Masiva (XML por defecto)",
 			"item": [
 				{
-					"name": "1. Importar libros seleccionados",
+					"name": "1. Importar libros seleccionados (respuesta XML)",
 					"request": {
 						"method": "POST",
 						"header": [
 							{
 								"key": "Content-Type",
-								"value": "application/json"
+								"value": "application/json",
+								"description": "Enviamos JSON, recibimos XML por defecto"
 							}
 						],
 						"body": {
@@ -526,13 +693,14 @@
 					"response": []
 				},
 				{
-					"name": "2. Importar libros de programación",
+					"name": "2. Importar libros de programación (respuesta XML)",
 					"request": {
 						"method": "POST",
 						"header": [
 							{
 								"key": "Content-Type",
-								"value": "application/json"
+								"value": "application/json",
+								"description": "Enviamos JSON, recibimos XML por defecto"
 							}
 						],
 						"body": {
@@ -546,14 +714,41 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "3. Importar libros seleccionados con respuesta JSON",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": "Para recibir respuesta en JSON"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"books\": [\n        {\n            \"title\": \"Design Patterns\",\n            \"authors\": [\"Gang of Four\"],\n            \"isbn\": \"9780201633610\",\n            \"publishedYear\": 1994,\n            \"coverUrl\": null\n        },\n        {\n            \"title\": \"Refactoring\",\n            \"authors\": [\"Martin Fowler\"],\n            \"isbn\": \"9780134757599\",\n            \"publishedYear\": 2018,\n            \"coverUrl\": null\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/books/import/selected",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "books", "import", "selected"]
+						}
+					},
+					"response": []
 				}
 			]
 		},
 		{
-			"name": "🔗 Asignación de Libros",
+			"name": "🔗 Asignación de Libros (XML por defecto)",
 			"item": [
 				{
-					"name": "1. Asignar libro a usuario",
+					"name": "1. Asignar libro a usuario (XML)",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -566,10 +761,29 @@
 					"response": []
 				},
 				{
-					"name": "2. Desasignar libro de usuario",
+					"name": "2. Desasignar libro de usuario (XML)",
 					"request": {
 						"method": "DELETE",
 						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/users/{{user_id}}/books/{{book_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "users", "{{user_id}}", "books", "{{book_id}}"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3. Asignar libro a usuario con respuesta JSON",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": "Para recibir respuesta en JSON"
+							}
+						],
 						"url": {
 							"raw": "{{base_url}}/api/v1/users/{{user_id}}/books/{{book_id}}",
 							"host": ["{{base_url}}"],
@@ -581,7 +795,7 @@
 			]
 		},
 		{
-			"name": "💾 Ejemplos con Datos Precargados",
+			"name": "💾 Ejemplos con Datos Precargados (XML por defecto)",
 			"item": [
 				{
 					"name": "1. Usuario Ana Torres (ID: 11111111-1111-1111-1111-111111111111)",
@@ -673,16 +887,10 @@
 			"name": "🧪 Endpoints de Prueba y Testing",
 			"item": [
 				{
-					"name": "1. Test XML/JSON Response",
+					"name": "1. Test XML Response (por defecto)",
 					"request": {
 						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"description": "Cambia a 'application/xml' para respuesta XML"
-							}
-						],
+						"header": [],
 						"url": {
 							"raw": "{{base_url}}/api/v1/test",
 							"host": ["{{base_url}}"],
@@ -692,13 +900,13 @@
 					"response": []
 				},
 				{
-					"name": "2. Test XML Response",
+					"name": "2. Test JSON Response",
 					"request": {
 						"method": "GET",
 						"header": [
 							{
 								"key": "Accept",
-								"value": "application/xml"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -747,7 +955,8 @@
 		{
 			"key": "base_url",
 			"value": "http://localhost:8080",
-			"type": "string"
+			"type": "string",
+			"description": "URL base del servidor BookApp Backend (XML por defecto)"
 		},
 		{
 			"key": "book_id",

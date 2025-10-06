@@ -18,15 +18,15 @@ import java.util.*
 @RequestMapping("/api/v1/users")
 class UserController(private val service: UserService) {
 
-    @PostMapping(produces = ["application/json","application/xml"])
+    @PostMapping(produces = ["application/xml", "application/json"])
     @ResponseStatus(HttpStatus.CREATED)
     fun create(@Valid @RequestBody body: CreateUserRequest): User =
         service.create(body.name, body.email)
 
-    @GetMapping("/{id}", produces = ["application/json","application/xml"])
+    @GetMapping("/{id}", produces = ["application/xml", "application/json"])
     fun get(@PathVariable id: UUID) = service.get(id)
 
-    @GetMapping(produces = ["application/json","application/xml"])
+    @GetMapping(produces = ["application/xml", "application/json"])
     fun list(
         @RequestParam(defaultValue = "0") page: Int,
         @RequestParam(defaultValue = "20") size: Int,
@@ -41,7 +41,7 @@ class UserController(private val service: UserService) {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     fun delete(@PathVariable id: UUID) = service.delete(id)
 
-    @GetMapping("/{id}/books", produces = ["application/json","application/xml"])
+    @GetMapping("/{id}/books", produces = ["application/xml", "application/json"])
 fun listBooks(
     @PathVariable id: UUID,
     @RequestParam(defaultValue = "0") page: Int,

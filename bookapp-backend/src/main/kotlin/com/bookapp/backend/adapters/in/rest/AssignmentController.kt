@@ -9,7 +9,7 @@ import java.util.*
 @RequestMapping("/api/v1/users/{userId}/books/{bookId}")
 class AssignmentController(private val service: AssignmentService) {
 
-    @PostMapping
+    @PostMapping(produces = ["application/xml", "application/json"])
     @ResponseStatus(HttpStatus.CREATED)
     fun assign(@PathVariable userId: UUID, @PathVariable bookId: UUID) =
         service.assign(userId, bookId)

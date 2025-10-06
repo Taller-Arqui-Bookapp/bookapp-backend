@@ -12,7 +12,13 @@ spring:
     default: dev              # arranca en dev por defecto
   mvc:
     contentnegotiation:
-      favor-parameter: false  # JSON por defecto; XML vía Accept
+      favor-parameter: false  # XML por defecto; JSON vía Accept
+      media-types:
+        xml: application/xml
+        json: application/json
+      parameter-name: format
+    pathmatch:
+      matching-strategy: ant_path_matcher
   flyway:
     locations: classpath:db/migration/{vendor}   # usa postgresql/ u h2/ según el driver
   datasource:

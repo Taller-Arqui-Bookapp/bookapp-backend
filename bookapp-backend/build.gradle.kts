@@ -35,13 +35,11 @@ dependencies {
 	implementation("net.logstash.logback:logstash-logback-encoder:7.4") // estable y compatible
 
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
-	//Kotlin XML
+	
+	// Jackson para XML/JSON (versiones consistentes)
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-	implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.17.2")
-	implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.17.2")
-
-	   // (parser XML robusto)
-    implementation("com.fasterxml.woodstox:woodstox-core")
+	implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml")
+	implementation("com.fasterxml.woodstox:woodstox-core")
 	//h2 y postgresql
 	runtimeOnly("com.h2database:h2")
 	runtimeOnly("org.postgresql:postgresql")
